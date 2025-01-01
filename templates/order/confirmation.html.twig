@@ -1,0 +1,15 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Confirmation de Commande{% endblock %}
+
+{% block body %}
+<div class="container mt-4 text-center">
+    <h1>Merci pour votre commande !</h1>
+    <p>Votre commande #{{ order.id }} a été enregistrée avec succès.</p>
+    <p>Total : <strong>{{ order.total }} €</strong></p>
+    <p>Un email de confirmation vous a été envoyé.</p>
+
+    <a href="{{ path('produit_index') }}" class="btn btn-primary">Continuer vos achats</a>
+    <a href="{{ path('order_index') }}" class="btn btn-secondary">Voir mes commandes</a>
+</div>
+{% endblock %}

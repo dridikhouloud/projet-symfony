@@ -1,0 +1,27 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="form-container">
+    <h1>Connexion</h1>
+
+    <form action="{{ path('user_login') }}" method="post">
+        <div>
+            <label for="username">Nom d'utilisateur ou email :</label>
+            <input type="text" id="username" name="_username" required>
+        </div>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="_password" required>
+        </div>
+        <div>
+            <input type="checkbox" id="remember_me" name="_remember_me">
+            <label for="remember_me">Se souvenir de moi</label>
+        </div>
+        <button type="submit">Se connecter</button>
+    </form>
+    <p>Pas encore inscrit ? <a href="{{ path('user_register') }}">Créer un compte</a></p>
+    <p><a href="{{ path('user_password_reset') }}">Mot de passe oublié ?</a></p>
+</div>
+{% endblock %}

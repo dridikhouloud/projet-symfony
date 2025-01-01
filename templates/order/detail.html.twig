@@ -1,0 +1,36 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Détails de la Commande{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Détails de la Commande #{{ order.id }}</h1>
+    <p>Date : {{ order.createdAt|date('d/m/Y H:i') }}</p>
+    <p>Statut : {{ order.status }}</p>
+    <p>Total : {{ order.total }} €</p>
+
+    <h2>Articles :</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Sous-total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items %}
+                <tr>
+                    <td>{{ item.produit.nom }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>{{ item.quantity * item.price }} €</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('order_index') }}" class="btn btn-secondary">Retour</a>
+</div>
+{% endblock %}

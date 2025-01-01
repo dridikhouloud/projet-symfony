@@ -1,0 +1,432 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-bottom: 1rem;
+}
+
+/* Header Styles */
+header {
+  background: #333;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+header .logo a {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding-left: 1rem;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+header nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+header nav ul li {
+  margin: 0 1.5rem;
+}
+
+header nav ul li a {
+  color: #fff;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #f39c12; /* Couleur au survol */
+}
+
+/* Main Content */
+main {
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  color: #333;
+  font-size: 2rem;
+}
+
+/* Footer Styles */
+footer {
+  background: #6d6b6b;
+  color: #fff;
+  padding: 1rem 0;
+  margin-top: 2rem;
+}
+
+footer .footer-content {
+  text-align: center;
+}
+
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+footer .social-icons li a {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+footer .social-icons li a:hover {
+  color: #f39c12; /* Couleur au survol des icônes */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  header nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header nav ul li {
+    margin: 0.5rem 0;
+  }
+
+  footer .social-icons {
+    flex-direction: column;
+  }
+}
+
+/* Style pour la page de connexion */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-container div {
+  margin-bottom: 15px;
+}
+
+.form-container label {
+  font-size: 14px;
+  color: #555;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.form-container input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #0056b3;
+}
+
+.form-container p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
+
+/* Style pour la page d'inscription */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-container div {
+  margin-bottom: 15px;
+}
+
+.form-container label {
+  font-size: 14px;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #218838;
+}
+
+.form-container p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
+
+#billboard {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 500px; /* Ajustez la hauteur selon vos besoins */
+  background-color: #000; /* Couleur de fond */
+}
+
+#billboard .swiper {
+  width: 100%;
+  height: 100%;
+}
+
+#billboard .swiper-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+#billboard .swiper-slide {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+#billboard .button-prev,
+#billboard .button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+#billboard .button-prev {
+  left: 10px;
+}
+
+#billboard .button-next {
+  right: 10px;
+}
+
+#billboard .icon {
+  font-size: 24px;
+}
+
+#billboard .button-prev:hover,
+#billboard .button-next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Styles supplémentaires pour l'icône */
+.icon-chevron-left,
+.icon-chevron-right {
+  font-size: 30px;
+}
+
+/*/
+/* Footer Container */
+.container {
+  padding: 50px 15px;
+  background-color: #f8f9fa;
+}
+
+/* Newsletter Form */
+.newslatter-form {
+  margin-bottom: 30px;
+}
+
+.newslatter-form input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.newslatter-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.newslatter-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer Widget */
+.footer-widget {
+  margin-top: 50px;
+}
+
+.single-footer-widget {
+  margin-bottom: 30px;
+}
+
+.single-footer-widget h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.single-footer-widget ul {
+  list-style: none;
+  padding: 0;
+}
+
+.single-footer-widget ul li {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.single-footer-widget ul li:hover {
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Footer Columns */
+.col-lg-3,
+.col-sm-6 {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 991px) {
+  .col-lg-3 {
+    width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-lg-3 {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+

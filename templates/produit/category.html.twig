@@ -1,0 +1,30 @@
+{# templates/produit/category.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits {{ category|capitalize }}{% endblock %}
+
+{% block body %}
+    <h1>Produits pour {{ category|capitalize }}</h1>
+
+    <div>
+        <h3>Filtrer par catégorie</h3>
+        <a href="{{ path('produit_category', {'category': 'homme'}) }}">Homme</a>
+        <a href="{{ path('produit_category', {'category': 'femme'}) }}">Femme</a>
+        <a href="{{ path('produit_category', {'category': 'bebe'}) }}">Bébé</a>
+        <a href="{{ path('produit_category', {'category': 'enfant'}) }}">Enfant</a>
+    </div>
+
+    <div>
+        {% if produits is empty %}
+            <p>Aucun produit trouvé dans cette catégorie.</p>
+        {% else %}
+            <ul>
+                {% for produit in produits %}
+                    <li>
+                        <a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

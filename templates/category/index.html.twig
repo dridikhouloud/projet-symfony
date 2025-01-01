@@ -1,0 +1,21 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Liste des Catégories{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Catégories</h1>
+    <ul class="list-group">
+        {% for category in categories %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{{ path('produit_category', { id: category.id }) }}">
+                    {{ category.nom }}
+                </a>
+                <span class="badge bg-primary rounded-pill">{{ category.produits|length }}</span>
+            </li>
+        {% else %}
+            <li class="list-group-item">Aucune catégorie trouvée.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

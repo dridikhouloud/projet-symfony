@@ -1,0 +1,21 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Résultats de Recherche{% endblock %}
+
+{% block body %}
+<div class="search-results">
+    <h1>Résultats pour "{{ query }}"</h1>
+    <div class="products">
+        {% for produit in produits %}
+            <div class="product">
+                <img src="{{ produit.mainPhotoUrl }}" alt="{{ produit.nom }}" class="product-image">
+                <h2>{{ produit.nom }}</h2>
+                <p>Prix : {{ produit.prix }} €</p>
+                <a href="{{ path('produit_show', { id: produit.id }) }}" class="btn">Voir Détails</a>
+            </div>
+        {% else %}
+            <p>Aucun produit trouvé pour "{{ query }}".</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

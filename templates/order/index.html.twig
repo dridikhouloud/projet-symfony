@@ -1,0 +1,38 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Mes Commandes{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Mes Commandes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.createdAt|date('d/m/Y H:i') }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.total }} €</td>
+                    <td>
+                        <a href="{{ path('order_details', { id: order.id }) }}" class="btn btn-sm btn-primary">Voir</a>
+                        <a href="{{ path('order_facture', { id: order.id }) }}" class="btn btn-sm btn-secondary">Facture</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune commande trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

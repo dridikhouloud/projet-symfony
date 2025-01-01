@@ -1,0 +1,38 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Facture Commande #{{ order.id }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Facture</h1>
+    <p>Commande #{{ order.id }}</p>
+    <p>Date : {{ order.createdAt|date('d/m/Y H:i') }}</p>
+    <p>Client : {{ user.fullName }}</p>
+    <p>Email : {{ user.email }}</p>
+
+    <h2>Articles :</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Sous-total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items %}
+                <tr>
+                    <td>{{ item.produit.nom }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>{{ item.quantity * item.price }} €</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Total Commande : {{ order.total }} €</h3>
+    <p>&copy; {{ "now"|date("Y") }} - Mon Site E-Commerce</p>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{# templates/produit/index.html.twig #}
+{% extends 'index.html.twig' %}
+
+{% block title %}Liste des Produits{% endblock %}
+
+{% block body %}
+    <h1>Tous les Produits</h1>
+
+    <div>
+        <h3>Filtrer par catégorie</h3>
+        <a href="{{ path('produit_category', {'category': 'homme'}) }}">Homme</a>
+        <a href="{{ path('produit_category', {'category': 'femme'}) }}">Femme</a>
+        <a href="{{ path('produit_category', {'category': 'bebe'}) }}">Bébé</a>
+        <a href="{{ path('produit_category', {'category': 'enfant'}) }}">Enfant</a>
+    </div>
+
+    <div>
+        <h3>Produits</h3>
+        <ul>
+            {% for produit in produits %}
+                <li>
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

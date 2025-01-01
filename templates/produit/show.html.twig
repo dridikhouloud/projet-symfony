@@ -1,0 +1,17 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Détails du Produit{% endblock %}
+
+{% block body %}
+<div class="product-details">
+    <h1>{{ produit.nom }}</h1>
+    <img src="{{ produit.mainPhotoUrl }}" alt="{{ produit.nom }}" class="product-image">
+    <p>Prix : {{ produit.prix }} €</p>
+    <p>Catégorie : {{ produit.category.nom }}</p>
+    <p>Genre : {{ produit.genre.nom }}</p>
+    <p>Description :</p>
+    <p>{{ produit.description }}</p>
+    <a href="{{ path('order_add', { id: produit.id }) }}" class="btn">Ajouter au Panier</a>
+    <a href="{{ path('produit_index') }}" class="btn">Retour à la Liste</a>
+</div>
+{% endblock %}

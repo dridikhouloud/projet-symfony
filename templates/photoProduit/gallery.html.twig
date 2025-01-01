@@ -1,0 +1,21 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Galerie de {{ produit.nom }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Galerie : {{ produit.nom }}</h1>
+    <div class="row">
+        {% for photo in produit.photos %}
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="{{ asset(photo.url) }}" class="card-img-top" alt="{{ produit.nom }}">
+                </div>
+            </div>
+        {% else %}
+            <p>Aucune image disponible pour ce produit.</p>
+        {% endfor %}
+    </div>
+    <a href="{{ path('produit_show', { id: produit.id }) }}" class="btn btn-secondary">Retour au produit</a>
+</div>
+{% endblock %}

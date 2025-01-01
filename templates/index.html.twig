@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Site E-Commerce{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card .product-details {
+            padding: 15px;
+        }
+
+        .product-card .product-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-card .product-description {
+            font-size: 0.9em;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .product-card .product-price {
+            font-size: 1.1em;
+            color: #E63946;
+            font-weight: bold;
+        }
+
+        .categories h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .btn-shop-now {
+            display: inline-block;
+            background-color: #E63946;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-shop-now:hover {
+            background-color: #D62828;
+        }
+
+
+
+        /* Général */
+#billboard {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Ajustez la hauteur de la section */
+    overflow: hidden;
+}
+
+/* Styles pour le Swiper */
+.main-swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Couleur de fond par défaut pour les images */
+    background-size: 100% auto; /* Permet à l'image de s'étendre en largeur */
+    background-position: center;
+    background-repeat: no-repeat; /* Assure qu'il n'y a pas de répétition de l'image */
+    height: 100%;
+}
+
+/* Éviter tout flou d'image */
+.swiper-slide img {
+    image-rendering: -webkit-optimize-contrast; /* Assure une image plus nette */
+    image-rendering: crisp-edges;
+    object-fit: cover; /* Si vous utilisez une balise <img> au lieu de background */
+}
+
+/* Contenu de la bannière */
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    max-width: 90%;
+    padding: 20px;
+}
+
+.banner-title {
+    font-size: 2.5rem; /* Taille de police pour le titre */
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.banner-description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-wrap a {
+    display: inline-block;
+    background-color: #E63946; /* Couleur rouge */
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-wrap a:hover {
+    background-color: #D62828; /* Couleur rouge foncé pour l'effet hover */
+}
+
+.icon {
+    margin-left: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .banner-title {
+        font-size: 2rem;
+    }
+
+    .banner-description {
+        font-size: 1rem;
+    }
+
+    .btn-wrap a {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-title {
+        font-size: 1.8rem;
+    }
+
+    .banner-description {
+        font-size: 0.9rem;
+    }
+
+    .btn-wrap a {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Style pour la section de la newsletter */
+.newslatter-form {
+    background-color: #f8f8f8;
+    padding: 30px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.newslatter-form form {
+    display: flex;
+    max-width: 600px;
+    width: 100%;
+}
+
+.newslatter-form input[type="text"], 
+.newslatter-form button {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+.newslatter-form input[type="text"] {
+    flex: 1;
+    border: 1px solid #ddd;
+}
+
+.newslatter-form input[type="text"]:focus {
+    border-color: #E63946;
+}
+
+.newslatter-form button {
+    background-color: #E63946;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.newslatter-form button:hover {
+    background-color: #D62828;
+}
+
+/* Style général pour les widgets de pied de page */
+.footer-widget {
+    background-color: #2a2a2a;
+    color: #fff;
+    padding: 50px 0;
+}
+
+.footer-widget .single-footer-widget {
+    margin-bottom: 30px;
+}
+
+.footer-widget h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.footer-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-widget ul li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #ddd;
+    transition: color 0.3s ease;
+}
+
+.footer-widget ul li:hover {
+    color: #E63946;
+    cursor: pointer;
+}
+
+/* Layout de la grille des widgets */
+.footer-widget .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-widget .col-lg-3, 
+.footer-widget .col-sm-6 {
+    flex: 1 1 calc(25% - 20px); /* pour 4 colonnes */
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .footer-widget .col-lg-3 {
+        flex: 1 1 calc(50% - 20px); /* pour 2 colonnes sur petits écrans */
+    }
+
+    .footer-widget .col-sm-6 {
+        flex: 1 1 100%;
+    }
+
+    .newslatter-form form {
+        flex-direction: column;
+    }
+
+    .newslatter-form input[type="text"] {
+        margin-bottom: 10px;
+    }
+
+    .newslatter-form button {
+        width: 100%;
+    }
+}
+
+/* ARTICLES LES PLUS VENDUS  */
+
+/* Conteneur principal de la section */
+.best-selling-items {
+    display: flex;
+    flex-direction: column; /* Titre au-dessus des cartes */
+    align-items: center; /* Centrer les éléments */
+    padding: 30px;
+    background-color: #f9f9f9; /* Fond clair */
+    box-sizing: border-box;
+    width: 100vw; /* Largeur sur toute la largeur de la fenêtre */
+    margin: 0; /* Supprimer les marges */
+}
+
+/* Titre de la section */
+.best-selling-items h2 {
+    font-size: 3rem;
+    color: #444;
+    text-align: center;
+    margin-bottom: 30px; /* Espacement entre le titre et les cartes */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Conteneur des cartes de produits */
+.products {
+    display: flex;
+    justify-content: center; /* Centrer les cartes horizontalement */
+    gap: 30px; /* Espacement entre les cartes */
+    width: 100%; /* Largeur totale du conteneur */
+    overflow-x: auto; /* Ajouter un défilement horizontal si nécessaire */
+    padding: 20px 0;
+}
+
+/* Style des cartes de produits */
+.product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px; /* Bordures arrondies pour un style moderne */
+    padding: 20px;
+    width: 300px; /* Largeur des cartes */
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0; /* Empêcher les cartes de rétrécir */
+}
+
+/* Effet de survol des cartes */
+.product:hover {
+    transform: scale(1.05); /* Légère mise en avant au survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre accentuée */
+}
+
+/* Image des produits */
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Arrondir les coins des images */
+    margin-bottom: 15px;
+}
+
+/* Nom du produit */
+.product h3 {
+    font-size: 1.4rem;
+    margin: 10px 0;
+    color: #333;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Prix du produit */
+.product p {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 5px 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Ajouter un style au conteneur pour un défilement horizontal */
+.products::-webkit-scrollbar {
+    height: 10px;
+}
+
+.products::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.products::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+}
+/* css pour le button*/
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: #007bff; /* Couleur principale */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Couleur au survol */
+    transform: translateY(-2px); /* Légère élévation au survol */
+}
+
+.btn-primary:active {
+    background-color: #003f7f; /* Couleur en cliquant */
+    transform: translateY(0); /* Réinitialisation de l'élévation */
+}
+
+.btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow autour du bouton */
+}
+
+
+
+
+/* Styles généraux du formulaire de login */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styles des champs de formulaire */
+div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #5b9bd5;
+    outline: none;
+}
+
+/* Bouton de soumission */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #5b9bd5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #4a8dc2;
+}
+
+/* Styles pour l'affichage des erreurs */
+div[style="color: red;"] {
+    margin-top: 20px;
+    text-align: center;
+    color: red;
+}
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="{{ path('produit_index') }}">Mon Site</a>
+            </div>
+            <ul class="menu">
+                <li><a href="{{ path('produit_index') }}">Home</a></li>
+                <li><a href="{{ path('produit_index') }}">Product</a></li>
+                <li><a href="{{ path('order_index') }}">Orders</a></li>
+                {% if app.user %}
+                    <li><a href="{{ path('user_profile') }}">Mon Profil</a></li>
+                    <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_login') }}">login</a></li>
+                    <li><a href="{{ path('app_register') }}">Registration</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+       <div class="container" >
+            <!-- Billboard Section -->
+            <section id="billboard" class="overflow-hidden">
+                <div class="swiper main-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" style="background-image: url('https://jai-un-pote-dans-la.com/wp-content/uploads/2023/04/jupdlc-fast-fashion-luxe-copie3.jpg');background-repeat: no-repeat;background-size: cover; ">
+                            <div class="banner-content">
+                                
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h2 class="banner-title">New Collection</h2>
+                                            <p class="banner-description">Explore our latest fashion collection for all occasions. Discover new styles and trends.</p>
+                                            <div class="btn-wrap">
+                                                <a href="shop.html" class="btn btn-primary btn-medium d-flex align-items-center">Shop Now <i class="icon icon-arrow-io"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                               
+                            </div>
+                        </div>
+                        <!-- Add more slides as necessary -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        {% block body %}
+        <div class="categories">
+            <h2>Our Catalogues</h2>
+            <div class="category-list">
+                <!-- Card for Men's Clothing -->
+                <div class="product-card">
+                    <a href="{{ path('produit_homme') }}">
+                        <img src="https://vog.com.tn/wp-content/uploads/2023/11/156050-kaki-1.jpg" alt="Vêtements pour Homme" class="product-image">
+                        <div class="product-details">
+                            <h3 class="product-title">men's Clothes</h3>
+                            <p class="product-description">Découvrez notre collection de vêtements pour homme, confort et style.</p>
+                            <span class="product-price">À partir de 39,99€</span>
+                          
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card for Women's Clothing -->
+                <div class="product-card">
+                    <a href="{{ path('produit_femme') }}">
+                        <img src="https://i.pinimg.com/474x/7d/d8/3e/7dd83e0d6d60e68541ca3ca2b142613c.jpg" alt="Vêtements pour Femme" class="product-image">
+                        <div class="product-details">
+                            <h3 class="product-title">women's Clothes</h3>
+                            <p class="product-description">Explorez notre gamme de vêtements élégants pour femme.</p>
+                            <span class="product-price">À partir de 29,99€</span>
+                            <a href="{{ path('produit_femme') }}" class="btn-shop-now">Voir plus</a>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card for Baby's Clothing -->
+                <div class="product-card">
+                    <a href="{{ path('produit_bebe') }}">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLF-fInKnnire8258AcNzOeqR9riBbsalP5Q&s" alt="Vêtements pour Bébé" class="product-image">
+                        <div class="product-details">
+                            <h3 class="product-title">clothes for babies</h3>
+                            <p class="product-description">Découvrez nos vêtements pour bébé, confortables et mignons.</p>
+                            <span class="product-price">À partir de 19,99€</span>
+                            <a href="{{ path('produit_bebe') }}" class="btn-shop-now">Voir plus</a>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card for Children's Clothing -->
+                <div class="product-card">
+                    <a href="{{ path('produit_enfant') }}">
+                        <img src="https://i.pinimg.com/736x/e1/0e/bb/e10ebb281bf225c4419e61e3557afd74.jpg" alt="Vêtements pour Enfants" class="product-image">
+                        <div class="product-details">
+                            <h3 class="product-title">clothes for Children</h3>
+                            <p class="product-description">Découvrez notre collection de vêtements amusants et colorés pour les enfants.</p>
+                            <span class="product-price">À partir de 24,99€</span>
+                            <a href="{{ path('produit_enfant') }}" class="btn-shop-now">Voir plus</a>
+                        </div>
+                    </a>
+                </div>
+
+                
+
+                
+
+
+
+<section class="best-selling-items">
+    <h2 class="section-title">Product Favorite</h2>
+    <div class="products">
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6BulmMmH1g_tSSCLYrjv_zgOJ2KNoUH94BA&s" alt="Dark Florish Onepiece">
+            <h3>DARK FLORISH ONEPIECE</h3>
+            <p>$95.00</p>
+        </div>
+        <div class="product">
+            <img src="https://i5.walmartimages.com/asr/6ff814d1-c28c-482d-8b16-6522b63b317e.011b5d1d733af71bcc0a2e3b0ed97ee0.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" alt="Baggy Shirt">
+            <h3>BAGGY SHIRT</h3>
+            <p>$55.00</p>
+        </div>
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFm7bFyzHOVFKcbKgUw4VJ2lVbsS79uT1CoY4wQyjqEMXi1BVfrzbj7gqFJnfNVK0i5VU&usqp=CAU" alt="Cotton Off-White Shirt">
+            <h3>COTTON OFF-WHITE SHIRT</h3>
+            <p>$65.00</p>
+        </div>
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxzZ1Yxtih7fCBcahfXvRvzxNK9V3N8vHzNA&s" alt="Handmade Crop Sweater">
+            <h3>HANDMADE CROP SWEATER</h3>
+            <p>$50.00</p>
+        </div>
+    </div>
+
+<br>
+
+   
+        <h2 class="section-title">Best Selling Products</h2>
+        <div class="products">
+            <div class="product">
+                <img src="https://i.pinimg.com/236x/2c/6b/90/2c6b90a7d6358c9853f9d39e420026f1.jpg" alt="Product 1">
+                <h3 >
+women's dress</h3>
+                <p >$19.99</p>
+                <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/236x/68/19/c8/6819c8d2421e5cc49185d684d92cc48f.jpg" alt="Product 2" >
+                <h3 >men's shirt</h3>
+                <p >$29.99</p>
+                <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/236x/e6/dd/93/e6dd930145e21b380a39794d51300ac4.jpg" alt="Product 3" >
+                <h3 >
+women's blazer</h3>
+                <p >$39.99</p>
+                <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/236x/21/c2/bf/21c2bfadf9f4d4a557e843b023e34f17.jpg" alt="Product 4" >
+                <h3 >
+child dress</h3>
+                <p class="product-price">$49.99</p>
+                <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+ 
+ </div> 
+        {% endblock %}
+    </main>
+
+    <footer>
+      
+       <div class="footer-widget">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-footer-widget">
+                    <h4>About us</h4>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Community</li>
+                        <li>Jobs</li>
+                        <li>Shipping</li>
+                        <li>Contact Us</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-footer-widget">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li>Search</li>
+                        <li>Privacy Policy</li>
+                        <li>2019 Lookbook</li>
+                        <li>Shipping & Delivery</li>
+                        <li>Gallery</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-footer-widget">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li>Free Shipping</li>
+                        <li>Free Returnes</li>
+                        <li>Our Franchising</li>
+                        <li>Terms and conditions</li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-footer-widget">
+                    <h4>Information</h4>
+                    <ul>
+                        <li>Payment methods</li>
+                        <li>Times and shipping costs</li>
+                        <li>Product Returns</li>
+                        <li>Shipping methods</li>
+                        <li>Conformity of the products</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="footer-content">
+            <p>&copy; {{ "now"|date("Y") }} - Mon Site E-Commerce. Tous droits réservés.</p>
+            <ul class="social-icons">
+                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    <script>
+        var swiper = new Swiper(".main-swiper", {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+</body>
+</html>
